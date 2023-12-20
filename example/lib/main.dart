@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
+import 'package:scroll_date_picker/src1/models/be_date_time.dart';
 
 void main() {
   runApp(MaterialApp(home: const MyApp()));
@@ -13,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  DateTime _selectedDate = DateTime.now();
+  BEDateTime _selectedDate = BEDateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class _MyAppState extends State<MyApp> {
             child: TextButton(
               onPressed: () {
                 setState(() {
-                  _selectedDate = DateTime.now();
+                  _selectedDate = BEDateTime.now();
                 });
               },
               child: Text(
@@ -51,6 +52,8 @@ class _MyAppState extends State<MyApp> {
             height: 250,
             child: ScrollDatePicker(
               indicatorColor: Colors.red.withOpacity(0.1),
+              maximumDate: BEDateTime(2600),
+              minimumDate: BEDateTime(2500),
               scrollViewOptions: DatePickerScrollViewOptions(
                 year: ScrollViewDetailOptions(
                   alignment: Alignment.center,
@@ -70,7 +73,7 @@ class _MyAppState extends State<MyApp> {
               ),
               selectedDate: _selectedDate,
               locale: Locale('en'),
-              onDateTimeChanged: (DateTime value) {
+              onDateTimeChanged: (BEDateTime value) {
                 setState(() {
                   _selectedDate = value;
                 });

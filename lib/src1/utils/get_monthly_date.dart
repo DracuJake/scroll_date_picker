@@ -5,7 +5,7 @@ int getMonthlyDate({required int year, required int month}) {
       day = 31;
       break;
     case 2:
-      day = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 ? 29 : 28;
+      day = (year % 4 == 3 && year % 100 != 43) || year % 400 == 143 ? 29 : 28;
       break;
     case 3:
       day = 31;

@@ -3,21 +3,22 @@ import 'package:scroll_date_picker/scroll_date_picker.dart';
 import 'package:scroll_date_picker/src1/widgets/date_scroll_view.dart';
 
 
+import 'models/be_date_time.dart';
 import 'utils/get_monthly_date.dart';
 
 class ScrollDatePicker extends StatefulWidget {
   ScrollDatePicker({
     Key? key,
     required this.selectedDate,
-    DateTime? minimumDate,
-    DateTime? maximumDate,
+    BEDateTime? minimumDate,
+    BEDateTime? maximumDate,
     required this.onDateTimeChanged,
     Locale? locale,
     DatePickerOptions? options,
     DatePickerScrollViewOptions? scrollViewOptions,
     this.indicator, this.indicatorColor,
-  })  : minimumDate = minimumDate ?? DateTime(1960, 1, 1),
-        maximumDate = maximumDate ?? DateTime.now(),
+  })  : minimumDate = minimumDate ?? BEDateTime(1960, 1, 1),
+        maximumDate = maximumDate ?? BEDateTime.now(),
         locale = locale ?? const Locale('en'),
         options = options ?? const DatePickerOptions(),
         scrollViewOptions =
@@ -25,16 +26,16 @@ class ScrollDatePicker extends StatefulWidget {
         super(key: key);
 
   /// The currently selected date.
-  final DateTime selectedDate;
+  final BEDateTime selectedDate;
 
   /// Minimum year that the picker can be scrolled
-  final DateTime minimumDate;
+  final BEDateTime minimumDate;
 
   /// Maximum year that the picker can be scrolled
-  final DateTime maximumDate;
+  final BEDateTime maximumDate;
 
   /// On optional listener that's called when the centered item changes.
-  final ValueChanged<DateTime> onDateTimeChanged;
+  final ValueChanged<BEDateTime> onDateTimeChanged;
 
   /// A set that allows you to specify options related to ListWheelScrollView.
   final DatePickerOptions options;
@@ -68,7 +69,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
   late Widget _monthScrollView;
   late Widget _dayScrollView;
 
-  late DateTime _selectedDate;
+  late BEDateTime _selectedDate;
   bool isYearScrollable = true;
   bool isMonthScrollable = true;
   List<int> _years = [];
@@ -98,7 +99,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
     super.initState();
     _selectedDate = widget.selectedDate.isAfter(widget.maximumDate) ||
             widget.selectedDate.isBefore(widget.minimumDate)
-        ? DateTime.now()
+        ? BEDateTime.now()
         : widget.selectedDate;
 
     _years = [
@@ -232,7 +233,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
   }
 
   void _onDateTimeChanged() {
-    _selectedDate = DateTime(selectedYear, selectedMonth, selectedDay);
+    _selectedDate = BEDateTime(selectedYear, selectedMonth, selectedDay);
     widget.onDateTimeChanged(_selectedDate);
   }
 
